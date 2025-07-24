@@ -1,0 +1,82 @@
+# Clean Architecture Folder Structure
+
+```
+lib/
+├── core/
+│   ├── network/
+│   │   ├── network_client.dart           # NetworkClient wrapper
+│   │   ├── network_client.g.dart         # Generated file
+│   │   ├── dio_client.dart               # Your existing Dio setup
+│   │   └── dio_client.g.dart             # Generated file
+│   ├── domain/
+│   │   └── utils/
+│   │       ├── app_failure.dart          # Your existing AppFailure
+│   │       ├── app_failure.freezed.dart  # Generated file
+│   │       ├── result.dart               # Your existing Result
+│   │       └── result.freezed.dart       # Generated file
+│   ├── presentation/
+│   │   ├── widgets/                      # Shared widgets
+│   │   └── theme/                        # App theme
+│   └── utils/
+│       ├── constants.dart                # App constants
+│       ├── extensions.dart               # Extensions
+│       └── validators.dart               # Form validators
+│
+├── features/
+│   └── user/                            # Example feature
+│       ├── data/
+│       │   ├── datasources/
+│       │   │   ├── user_datasource.dart           # Abstract interface
+│       │   │   ├── user_datasource_impl.dart      # Implementation
+│       │   │   └── user_datasource_impl.g.dart    # Generated file
+│       │   ├── models/
+│       │   │   ├── user_model.dart                # Data model
+│       │   │   ├── user_model.freezed.dart        # Generated file
+│       │   │   └── user_model.g.dart              # Generated file
+│       │   └── repositories/
+│       │       ├── user_repository_impl.dart      # Repository implementation
+│       │       └── user_repository_impl.g.dart    # Generated file
+│       ├── domain/
+│       │   ├── entities/
+│       │   │   └── user_entity.dart               # Domain entity (optional)
+│       │   ├── repositories/
+│       │   │   └── user_repository.dart           # Abstract repository
+│       │   └── usecases/
+│       │       ├── get_users_usecase.dart         # Use cases (optional)
+│       │       ├── create_user_usecase.dart
+│       │       └── delete_user_usecase.dart
+│       └── presentation/
+│           ├── pages/
+│           │   ├── user_list_page.dart
+│           │   └── user_detail_page.dart
+│           ├── widgets/
+│           │   ├── user_card.dart
+│           │   └── user_form.dart
+│           └── providers/
+│               ├── user_notifier.dart             # State management
+│               └── user_notifier.g.dart           # Generated file
+│
+├── services/                            # Business logic services
+│   ├── user_service.dart                # Your UserService
+│   ├── user_service.g.dart              # Generated file
+│   ├── auth_service.dart                # Authentication service
+│   └── cache_service.dart               # Caching service
+│
+└── main.dart
+```
+
+## Layer Explanations:
+
+### 1. **Core Layer** (`lib/core/`)
+- **Purpose**: Shared utilities, network setup, common domain models
+- **network/**: Network client wrapper and Dio configuration
+- **domain/utils/**: Shared domain utilities (Result, AppFailure)
+- **presentation/**: Shared UI components, themes
+- **utils/**: App-wide utilities, constants, extensions
+
+### 2. **Features Layer** (`lib/features/`)
+Each feature follows clean architecture layers:
+
+#### **Data Layer** (`features/[feature]/data/`)
+- **datasources/**: Network data sources (API calls)
+- **models/**: Data models with JSON seria
