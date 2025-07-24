@@ -86,7 +86,7 @@ extension AppFailurePatterns on AppFailure {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( NetworkFailure value)?  network,TResult Function( AuthenticationFailure value)?  authentication,TResult Function( ValidationFailure value)?  validation,TResult Function( ServerFailure value)?  server,TResult Function( UnknownFailure value)?  unknown,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( NetworkFailure value)?  network,TResult Function( AuthenticationFailure value)?  authentication,TResult Function( ValidationFailure value)?  validation,TResult Function( ServerFailure value)?  server,TResult Function( UnknownFailure value)?  unknown,TResult Function( DatabaseFailure value)?  database,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case NetworkFailure() when network != null:
@@ -94,7 +94,8 @@ return network(_that);case AuthenticationFailure() when authentication != null:
 return authentication(_that);case ValidationFailure() when validation != null:
 return validation(_that);case ServerFailure() when server != null:
 return server(_that);case UnknownFailure() when unknown != null:
-return unknown(_that);case _:
+return unknown(_that);case DatabaseFailure() when database != null:
+return database(_that);case _:
   return orElse();
 
 }
@@ -112,7 +113,7 @@ return unknown(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( NetworkFailure value)  network,required TResult Function( AuthenticationFailure value)  authentication,required TResult Function( ValidationFailure value)  validation,required TResult Function( ServerFailure value)  server,required TResult Function( UnknownFailure value)  unknown,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( NetworkFailure value)  network,required TResult Function( AuthenticationFailure value)  authentication,required TResult Function( ValidationFailure value)  validation,required TResult Function( ServerFailure value)  server,required TResult Function( UnknownFailure value)  unknown,required TResult Function( DatabaseFailure value)  database,}){
 final _that = this;
 switch (_that) {
 case NetworkFailure():
@@ -120,7 +121,8 @@ return network(_that);case AuthenticationFailure():
 return authentication(_that);case ValidationFailure():
 return validation(_that);case ServerFailure():
 return server(_that);case UnknownFailure():
-return unknown(_that);}
+return unknown(_that);case DatabaseFailure():
+return database(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -134,7 +136,7 @@ return unknown(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( NetworkFailure value)?  network,TResult? Function( AuthenticationFailure value)?  authentication,TResult? Function( ValidationFailure value)?  validation,TResult? Function( ServerFailure value)?  server,TResult? Function( UnknownFailure value)?  unknown,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( NetworkFailure value)?  network,TResult? Function( AuthenticationFailure value)?  authentication,TResult? Function( ValidationFailure value)?  validation,TResult? Function( ServerFailure value)?  server,TResult? Function( UnknownFailure value)?  unknown,TResult? Function( DatabaseFailure value)?  database,}){
 final _that = this;
 switch (_that) {
 case NetworkFailure() when network != null:
@@ -142,7 +144,8 @@ return network(_that);case AuthenticationFailure() when authentication != null:
 return authentication(_that);case ValidationFailure() when validation != null:
 return validation(_that);case ServerFailure() when server != null:
 return server(_that);case UnknownFailure() when unknown != null:
-return unknown(_that);case _:
+return unknown(_that);case DatabaseFailure() when database != null:
+return database(_that);case _:
   return null;
 
 }
@@ -159,14 +162,15 @@ return unknown(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String message,  int? statusCode)?  network,TResult Function( String message)?  authentication,TResult Function( String message,  Map<String, String>? fieldErrors)?  validation,TResult Function( String message,  int? statusCode)?  server,TResult Function( String message)?  unknown,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String message,  int? statusCode)?  network,TResult Function( String message)?  authentication,TResult Function( String message,  Map<String, String>? fieldErrors)?  validation,TResult Function( String message,  int? statusCode)?  server,TResult Function( String message)?  unknown,TResult Function( String message)?  database,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case NetworkFailure() when network != null:
 return network(_that.message,_that.statusCode);case AuthenticationFailure() when authentication != null:
 return authentication(_that.message);case ValidationFailure() when validation != null:
 return validation(_that.message,_that.fieldErrors);case ServerFailure() when server != null:
 return server(_that.message,_that.statusCode);case UnknownFailure() when unknown != null:
-return unknown(_that.message);case _:
+return unknown(_that.message);case DatabaseFailure() when database != null:
+return database(_that.message);case _:
   return orElse();
 
 }
@@ -184,14 +188,15 @@ return unknown(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String message,  int? statusCode)  network,required TResult Function( String message)  authentication,required TResult Function( String message,  Map<String, String>? fieldErrors)  validation,required TResult Function( String message,  int? statusCode)  server,required TResult Function( String message)  unknown,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String message,  int? statusCode)  network,required TResult Function( String message)  authentication,required TResult Function( String message,  Map<String, String>? fieldErrors)  validation,required TResult Function( String message,  int? statusCode)  server,required TResult Function( String message)  unknown,required TResult Function( String message)  database,}) {final _that = this;
 switch (_that) {
 case NetworkFailure():
 return network(_that.message,_that.statusCode);case AuthenticationFailure():
 return authentication(_that.message);case ValidationFailure():
 return validation(_that.message,_that.fieldErrors);case ServerFailure():
 return server(_that.message,_that.statusCode);case UnknownFailure():
-return unknown(_that.message);}
+return unknown(_that.message);case DatabaseFailure():
+return database(_that.message);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -205,14 +210,15 @@ return unknown(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String message,  int? statusCode)?  network,TResult? Function( String message)?  authentication,TResult? Function( String message,  Map<String, String>? fieldErrors)?  validation,TResult? Function( String message,  int? statusCode)?  server,TResult? Function( String message)?  unknown,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String message,  int? statusCode)?  network,TResult? Function( String message)?  authentication,TResult? Function( String message,  Map<String, String>? fieldErrors)?  validation,TResult? Function( String message,  int? statusCode)?  server,TResult? Function( String message)?  unknown,TResult? Function( String message)?  database,}) {final _that = this;
 switch (_that) {
 case NetworkFailure() when network != null:
 return network(_that.message,_that.statusCode);case AuthenticationFailure() when authentication != null:
 return authentication(_that.message);case ValidationFailure() when validation != null:
 return validation(_that.message,_that.fieldErrors);case ServerFailure() when server != null:
 return server(_that.message,_that.statusCode);case UnknownFailure() when unknown != null:
-return unknown(_that.message);case _:
+return unknown(_that.message);case DatabaseFailure() when database != null:
+return database(_that.message);case _:
   return null;
 
 }
@@ -556,6 +562,72 @@ class _$UnknownFailureCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
   return _then(UnknownFailure(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class DatabaseFailure implements AppFailure {
+  const DatabaseFailure({required this.message});
+  
+
+@override final  String message;
+
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DatabaseFailureCopyWith<DatabaseFailure> get copyWith => _$DatabaseFailureCopyWithImpl<DatabaseFailure>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DatabaseFailure&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'AppFailure.database(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DatabaseFailureCopyWith<$Res> implements $AppFailureCopyWith<$Res> {
+  factory $DatabaseFailureCopyWith(DatabaseFailure value, $Res Function(DatabaseFailure) _then) = _$DatabaseFailureCopyWithImpl;
+@override @useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class _$DatabaseFailureCopyWithImpl<$Res>
+    implements $DatabaseFailureCopyWith<$Res> {
+  _$DatabaseFailureCopyWithImpl(this._self, this._then);
+
+  final DatabaseFailure _self;
+  final $Res Function(DatabaseFailure) _then;
+
+/// Create a copy of AppFailure
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(DatabaseFailure(
 message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));
